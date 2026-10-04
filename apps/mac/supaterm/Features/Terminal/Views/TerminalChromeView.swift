@@ -4,8 +4,8 @@ import SwiftUI
 
 enum TerminalSplitMetrics {
   nonisolated static let minimumPaneSize: CGFloat = 10
-  nonisolated static let dividerVisibleSize: CGFloat = 1
-  nonisolated static let dividerInvisibleSize: CGFloat = 6
+  nonisolated static let dividerVisibleSize: CGFloat = 2
+  nonisolated static let dividerInvisibleSize: CGFloat = 5
   nonisolated static let dividerHitboxSize: CGFloat = dividerVisibleSize + dividerInvisibleSize
 }
 
