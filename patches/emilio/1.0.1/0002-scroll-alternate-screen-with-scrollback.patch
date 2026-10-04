@@ -1,0 +1,21 @@
+diff --git a/src/Surface.zig b/src/Surface.zig
+index 8ffd90149..1e0fbe9e8 100644
+--- a/src/Surface.zig
++++ b/src/Surface.zig
+@@ -3598,11 +3598,12 @@ pub fn scrollCallback(
+             try self.setSelection(null);
+         }
+ 
+-        // If we're in alternate screen with alternate scroll enabled, then
+-        // we convert to cursor keys. This only happens if we're:
+-        // (1) alt screen (2) no explicit mouse reporting and (3) alt
+-        // scroll mode enabled.
++        // If we're in an alternate screen without retained scrollback and
++        // alternate scroll is enabled, convert wheel events to cursor keys.
++        // An alternate screen that retains scrollback must use the normal
++        // viewport scrolling path below.
+         if (self.io.terminal.screens.active_key == .alternate and
++            self.io.terminal.screens.active.no_scrollback and
+             self.io.terminal.flags.mouse_event == .none and
+             self.io.terminal.modes.get(.mouse_alternate_scroll))
+         {

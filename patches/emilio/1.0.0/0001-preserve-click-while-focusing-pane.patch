@@ -1,0 +1,14 @@
+diff --git a/apps/mac/supaterm/Features/Terminal/Ghostty/GhosttySurfaceView.swift b/apps/mac/supaterm/Features/Terminal/Ghostty/GhosttySurfaceView.swift
+index 1560d6e..2778c3d 100644
+--- a/apps/mac/supaterm/Features/Terminal/Ghostty/GhosttySurfaceView.swift
++++ b/apps/mac/supaterm/Features/Terminal/Ghostty/GhosttySurfaceView.swift
+@@ -1211,8 +1211,7 @@ final class GhosttySurfaceView: NSView, Identifiable {
+     guard window.firstResponder !== self else { return event }
+     if applicationAndWindowAreActive(window) {
+       window.makeFirstResponder(self)
+-      suppressNextLeftMouseUp = true
+-      return nil
++      return event
+     }
+     window.makeFirstResponder(self)
+     return event

@@ -1,0 +1,59 @@
+diff --git a/apps/mac/Project.swift b/apps/mac/Project.swift
+index f41ad46..79fd445 100644
+--- a/apps/mac/Project.swift
++++ b/apps/mac/Project.swift
+@@ -289,6 +289,7 @@ let project = Project(
+         "CFBundleDisplayName": "Supaterm",
+         "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+         "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
++        "EmilioBuildVersion": "1.0.1",
+         "LSApplicationCategoryType": "public.app-category.developer-tools",
+         "NSAppleEventsUsageDescription": "A program running within Supaterm would like to use AppleScript.",
+         "NSAudioCaptureUsageDescription": "A program running within Supaterm would like to access your system's audio.",
+diff --git a/apps/mac/supaterm/Features/Settings/SettingsAboutView.swift b/apps/mac/supaterm/Features/Settings/SettingsAboutView.swift
+index b671eb3..4d4b9a3 100644
+--- a/apps/mac/supaterm/Features/Settings/SettingsAboutView.swift
++++ b/apps/mac/supaterm/Features/Settings/SettingsAboutView.swift
+@@ -59,16 +59,22 @@ struct SettingsAboutView: View {
+   }
+ 
+   private var versionText: String {
+-    switch (AppBuild.version, AppBuild.buildNumber) {
++    let upstreamVersion = switch (AppBuild.version, AppBuild.buildNumber) {
+     case (let version, let buildNumber) where !version.isEmpty && !buildNumber.isEmpty:
+-      return "\(version) (\(buildNumber))"
++      "\(version) (\(buildNumber))"
+     case (let version, _) where !version.isEmpty:
+-      return version
++      version
+     case (_, let buildNumber) where !buildNumber.isEmpty:
+-      return buildNumber
++      buildNumber
+     default:
+-      return "Unknown Version"
++      "Unknown Version"
+     }
++
++    guard !AppBuild.emilioVersion.isEmpty else {
++      return upstreamVersion
++    }
++
++    return "\(upstreamVersion) · EMILIO \(AppBuild.emilioVersion)"
+   }
+ 
+   var body: some View {
+diff --git a/apps/mac/supaterm/Support/AppBuild.swift b/apps/mac/supaterm/Support/AppBuild.swift
+index 31fc11f..841ef62 100644
+--- a/apps/mac/supaterm/Support/AppBuild.swift
++++ b/apps/mac/supaterm/Support/AppBuild.swift
+@@ -29,6 +29,10 @@ public enum AppBuild {
+     infoString("CFBundleVersion")
+   }
+ 
++  public nonisolated static var emilioVersion: String {
++    infoString("EmilioBuildVersion")
++  }
++
+   public nonisolated static func isDevelopmentFlag(_ value: Any?) -> Bool {
+     switch value {
+     case let boolValue as Bool:

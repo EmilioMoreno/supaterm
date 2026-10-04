@@ -1,0 +1,13 @@
+diff --git a/apps/mac/supaterm/Features/Terminal/Views/TerminalChromeView.swift b/apps/mac/supaterm/Features/Terminal/Views/TerminalChromeView.swift
+index 033c2bc..3b95c90 100644
+--- a/apps/mac/supaterm/Features/Terminal/Views/TerminalChromeView.swift
++++ b/apps/mac/supaterm/Features/Terminal/Views/TerminalChromeView.swift
+@@ -4,8 +4,8 @@ import SwiftUI
+ enum TerminalSplitMetrics {
+   nonisolated static let minimumPaneSize: CGFloat = 10
+-  nonisolated static let dividerVisibleSize: CGFloat = 1
+-  nonisolated static let dividerInvisibleSize: CGFloat = 6
++  nonisolated static let dividerVisibleSize: CGFloat = 2
++  nonisolated static let dividerInvisibleSize: CGFloat = 5
+   nonisolated static let dividerHitboxSize: CGFloat = dividerVisibleSize + dividerInvisibleSize
+ }

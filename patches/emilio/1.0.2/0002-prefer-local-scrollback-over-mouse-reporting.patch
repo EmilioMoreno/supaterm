@@ -1,0 +1,23 @@
+diff --git a/src/Surface.zig b/src/Surface.zig
+--- a/src/Surface.zig
++++ b/src/Surface.zig
+@@ -3588,10 +3588,19 @@ pub fn scrollCallback(
+ 
+     // log.info("SCROLL: delta_y={} delta_x={}", .{ y.delta, x.delta });
+ 
+-    {
++    scroll: {
+         self.renderer_state.mutex.lockUncancelable(global.io());
+         defer self.renderer_state.mutex.unlock(global.io());
+ 
++        // Emilio builds retain scrollback for both primary and alternate
++        // screens. Give vertical wheel input to that local viewport before
++        // applications can consume it as mouse events or cursor keys.
++        if (!self.io.terminal.screens.active.no_scrollback and y.delta != 0) {
++            self.io.terminal.scrollViewport(.{ .delta = y.delta * -1 });
++            break :scroll;
++        }
++
+         // If we have an active mouse reporting mode, clear the selection.
+         // The selection can occur if the user uses the shift mod key to
+         // override mouse grabbing from the window.

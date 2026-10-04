@@ -82,3 +82,9 @@ execplans/
 plans/
 hk.local.pkl
 .config/hk.local.pkl
+
+# Personal fork build artifacts and local data
+/outputs/
+/work/
+/apps/mac/com.apple.DeveloperTools/
+/vzdump-*.vma.gz
