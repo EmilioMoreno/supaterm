@@ -1211,8 +1211,7 @@ final class GhosttySurfaceView: NSView, Identifiable {
     guard window.firstResponder !== self else { return event }
     if applicationAndWindowAreActive(window) {
       window.makeFirstResponder(self)
-      suppressNextLeftMouseUp = true
-      return nil
+      return event
     }
     window.makeFirstResponder(self)
     return event
