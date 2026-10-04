@@ -1,8 +1,8 @@
 [submodule "ThirdParty/ghostty"]
 	path = apps/mac/ThirdParty/ghostty
-	url = git@github.com:supabitapp/ghostty.git
-	pushurl = git@github.com:supabitapp/ghostty.git
-	branch = supaterm
+	url = https://github.com/EmilioMoreno/ghostty.git
+	pushurl = https://github.com/EmilioMoreno/ghostty.git
+	branch = features
 [submodule "integrations/supaterm-skills"]
 	path = integrations/supaterm-skills
 	url = git@github.com:supabitapp/supaterm-skills.git
