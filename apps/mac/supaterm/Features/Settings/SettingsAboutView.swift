@@ -59,16 +59,22 @@ struct SettingsAboutView: View {
   }
 
   private var versionText: String {
-    switch (AppBuild.version, AppBuild.buildNumber) {
+    let upstreamVersion = switch (AppBuild.version, AppBuild.buildNumber) {
     case (let version, let buildNumber) where !version.isEmpty && !buildNumber.isEmpty:
-      return "\(version) (\(buildNumber))"
+      "\(version) (\(buildNumber))"
     case (let version, _) where !version.isEmpty:
-      return version
+      version
     case (_, let buildNumber) where !buildNumber.isEmpty:
-      return buildNumber
+      buildNumber
     default:
-      return "Unknown Version"
+      "Unknown Version"
     }
+
+    guard !AppBuild.emilioVersion.isEmpty else {
+      return upstreamVersion
+    }
+
+    return "\(upstreamVersion) · EMILIO \(AppBuild.emilioVersion)"
   }
 
   var body: some View {

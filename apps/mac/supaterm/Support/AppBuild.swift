@@ -29,6 +29,11 @@ public enum AppBuild {
     infoString("CFBundleVersion")
   }
 
+  public nonisolated static var emilioVersion: String {
+    let bundledVersion = infoString("EmilioBuildVersion")
+    return bundledVersion.isEmpty ? "1.0.2" : bundledVersion
+  }
+
   public nonisolated static func isDevelopmentFlag(_ value: Any?) -> Bool {
     switch value {
     case let boolValue as Bool:
